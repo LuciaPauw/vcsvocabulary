@@ -1,13 +1,13 @@
-@prefix : <http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#> .
+@prefix : <http://purl.org/aiaontology/vcsvocabulary#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix cdmv: <http://www.semanticweb.org/lucia/ontologies/2023/0/cdmvocabulary#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary> .
+@base <http://purl.org/aiaontology/vcsvocabulary> .
 
-<http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary> rdf:type owl:Ontology .
+<http://purl.org/aiaontology/vcsvocabulary> rdf:type owl:Ontology .
 
 #################################################################
 #    Annotation properties
@@ -53,13 +53,13 @@ owl:sameAs rdf:type owl:AnnotationProperty .
 #    Object Properties
 #################################################################
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#hasProof
+###  http://purl.org/aiaontology/vcsvocabulary#hasProof
 :hasProof rdf:type owl:ObjectProperty ;
           rdfs:domain :Requirement ;
           rdfs:range :Proof .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#meetsRequirement
+###  http://purl.org/aiaontology/vcsvocabulary#meetsRequirement
 :meetsRequirement rdf:type owl:ObjectProperty ;
                   rdfs:domain :Project ;
                   rdfs:range :Requirement .
@@ -69,7 +69,7 @@ owl:sameAs rdf:type owl:AnnotationProperty .
 #    Data properties
 #################################################################
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#requirementHasDefinition
+###  http://purl.org/aiaontology/vcsvocabulary#requirementHasDefinition
 :requirementHasDefinition rdf:type owl:DatatypeProperty ;
                           rdfs:comment "FIX: one possible way to handle VCS Requirements. Another relevant question is perhaps if it is even necessary to incorporate these specific requirements into the vocabulary."@en .
 
@@ -78,277 +78,353 @@ owl:sameAs rdf:type owl:AnnotationProperty .
 #    Classes
 #################################################################
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/aia#Condition
-<http://www.semanticweb.org/lucia/ontologies/2023/0/aia#Condition> rdf:type owl:Class ;
-                                                                   rdfs:comment "The instances of this class illustrate the types of WRC activities that may be combined with other AFOLU project categories."@en .
+###  http://purl.org/aiaontology#Activity
+<http://purl.org/aiaontology#Activity> rdf:type owl:Class ;
+                                       owl:equivalentClass :Project .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/aia#State
-<http://www.semanticweb.org/lucia/ontologies/2023/0/aia#State> rdf:type owl:Class .
+###  http://purl.org/aiaontology#Condition
+<http://purl.org/aiaontology#Condition> rdf:type owl:Class ;
+                                        rdfs:comment "The instances of this class illustrate the types of WRC activities that may be combined with other AFOLU project categories."@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#ACoGS
+###  http://purl.org/aiaontology#CreditingPeriod
+<http://purl.org/aiaontology#CreditingPeriod> rdf:type owl:Class ;
+                                              owl:equivalentClass :ProjectCreditingPeriod .
+
+
+###  http://purl.org/aiaontology#Procedure
+<http://purl.org/aiaontology#Procedure> rdf:type owl:Class ;
+                                        owl:equivalentClass :Methodology .
+
+
+###  http://purl.org/aiaontology#State
+<http://purl.org/aiaontology#State> rdf:type owl:Class .
+
+
+###  http://purl.org/aiaontology/cdmvocabulary#BaselineScenario
+<http://purl.org/aiaontology/cdmvocabulary#BaselineScenario> rdf:type owl:Class ;
+                                                             owl:equivalentClass :BaselineScenario .
+
+
+###  http://purl.org/aiaontology/cdmvocabulary#SectoralScope
+<http://purl.org/aiaontology/cdmvocabulary#SectoralScope> rdf:type owl:Class ;
+                                                          owl:equivalentClass :SectoralScope .
+
+
+###  http://purl.org/aiaontology/vcsvocabulary#ACoGS
 :ACoGS rdf:type owl:Class ;
        rdfs:subClassOf :AFOLUProject ;
        <http://www.w3.org/2004/02/skos/core#altLabel> "ACoGS"@en ;
        <http://www.w3.org/2004/02/skos/core#prefLabel> "Avoided Conversion of Grasslands and Shrublands"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#AFOLUProject
+###  http://purl.org/aiaontology/vcsvocabulary#AFOLUProject
 :AFOLUProject rdf:type owl:Class ;
               rdfs:subClassOf :Project ;
               rdfs:label "Agriculture, Forestry, and Other Land Use Projects"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#ALM
+###  http://purl.org/aiaontology/vcsvocabulary#ALM
 :ALM rdf:type owl:Class ;
      rdfs:subClassOf :AFOLUProject ;
      <http://www.w3.org/2004/02/skos/core#altLabel> "ALM"@en ;
      <http://www.w3.org/2004/02/skos/core#prefLabel> "Agricultural Land Management"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#ARR
+###  http://purl.org/aiaontology/vcsvocabulary#ARR
 :ARR rdf:type owl:Class ;
      rdfs:subClassOf :AFOLUProject ;
      <http://www.w3.org/2004/02/skos/core#altLabel> "ARR"@en ;
      <http://www.w3.org/2004/02/skos/core#prefLabel> "Afforestation, Reforestation and Revegetation"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#BaselineScenario
+###  http://purl.org/aiaontology/vcsvocabulary#BaselineScenario
 :BaselineScenario rdf:type owl:Class ;
-                  rdfs:subClassOf <http://www.semanticweb.org/lucia/ontologies/2023/0/aia#State> ;
-                  owl:equivalentClass cdmv:BaselineScenario .
+                  rdfs:subClassOf <http://purl.org/aiaontology#State> .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#IFM
+###  http://purl.org/aiaontology/vcsvocabulary#IFM
 :IFM rdf:type owl:Class ;
      rdfs:subClassOf :AFOLUProject ;
      <http://www.w3.org/2004/02/skos/core#altLabel> "IFM"@en ;
      <http://www.w3.org/2004/02/skos/core#prefLabel> "Improved Forest Management"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#LargeProjects
+###  http://purl.org/aiaontology/vcsvocabulary#LargeProjects
 :LargeProjects rdf:type owl:Class ;
                rdfs:subClassOf :ProjectScale .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#Methodology
-:Methodology rdf:type owl:Class ;
-             owl:equivalentClass <http://www.semanticweb.org/lucia/ontologies/2023/0/aia#Procedure> .
+###  http://purl.org/aiaontology/vcsvocabulary#Methodology
+:Methodology rdf:type owl:Class .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#ODSProject
+###  http://purl.org/aiaontology/vcsvocabulary#ODSProject
 :ODSProject rdf:type owl:Class ;
             rdfs:subClassOf :Project ;
             rdfs:label "Ozone-Depleting Substances Project"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#Project
-:Project rdf:type owl:Class ;
-         owl:equivalentClass <http://www.semanticweb.org/lucia/ontologies/2023/0/aia#Activity> .
+###  http://purl.org/aiaontology/vcsvocabulary#Project
+:Project rdf:type owl:Class .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#ProjectBoundary
+###  http://purl.org/aiaontology/vcsvocabulary#ProjectBoundary
 :ProjectBoundary rdf:type owl:Class ;
                  rdfs:comment "The project boundary includes the GHG sources, sinks, and reservoirs that are relevant to the project and baseline scenarios. The relevant GHG sources, sinks, and reservoirs that must be included or excluded, or are optional, are set out in the methodology(s) applied by the project."@en ;
-                 <http://www.w3.org/2004/02/skos/core#related> <http://www.semanticweb.org/lucia/ontologies/2023/0/aia#Parameter> ,
-                                                               cdmv:ProjectBoundary .
+                 <http://www.w3.org/2004/02/skos/core#related> <http://purl.org/aiaontology#Parameter> ,
+                                                               <http://purl.org/aiaontology/cdmvocabulary#ProjectBoundary> .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#ProjectCreditingPeriod
+###  http://purl.org/aiaontology/vcsvocabulary#ProjectCreditingPeriod
 :ProjectCreditingPeriod rdf:type owl:Class ;
                         rdfs:isDefinedBy "The project crediting period is the time period for which GHG emission reductions or removals generated by the project are eligible for issuance as VCUs. Project crediting periods must be renewed periodically in order to ensure that changes to a project’s baseline scenario and regulatory surplus are taken into consideration throughout the lifetime of the project."@en ;
-                        rdfs:label "Project Crediting Period"@en ;
-                        owl:equivalentClass <http://www.semanticweb.org/lucia/ontologies/2023/0/aia#CreditingPeriod> .
+                        rdfs:label "Project Crediting Period"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#ProjectScale
+###  http://purl.org/aiaontology/vcsvocabulary#ProjectScale
 :ProjectScale rdf:type owl:Class ;
               rdfs:comment """Projects are categorized by size according to their estimated average annual GHG emission reductions or removals. Materiality thresholds differ for projects of different sizes.
-1) Projects: Less than or equal to 300,000 tonnes of CO2e per year.
-2) Large projects: Greater than 300,000 tonnes of CO2e per year."""@en .
+    1) Projects: Less than or equal to 300,000 tonnes of CO2e per year.
+    2) Large projects: Greater than 300,000 tonnes of CO2e per year."""@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#ProjectStartDate
+###  http://purl.org/aiaontology/vcsvocabulary#ProjectStartDate
 :ProjectStartDate rdf:type owl:Class ;
-                  rdfs:comment "The project start date of a non-AFOLU project is the date on which the project began generating GHG emission reductions or removals. The project start date of an AFOLU project is the date on which activities that led to the generation of GHG emission reductions or removals are implemented (e.g., preparing land for seeding, planting, changing agricultural or forestry practices, rewetting, restoring hydrological functions, or implementing management or protection plans). Projects must complete validation within specific timeframes from the project start date."@en ;
-                  owl:equivalentClass <http://www.w3.org/ns/prov#endedAtTime> .
+                  owl:equivalentClass <http://www.w3.org/ns/prov#endedAtTime> ;
+                  rdfs:comment "The project start date of a non-AFOLU project is the date on which the project began generating GHG emission reductions or removals. The project start date of an AFOLU project is the date on which activities that led to the generation of GHG emission reductions or removals are implemented (e.g., preparing land for seeding, planting, changing agricultural or forestry practices, rewetting, restoring hydrological functions, or implementing management or protection plans). Projects must complete validation within specific timeframes from the project start date."@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#Projects
+###  http://purl.org/aiaontology/vcsvocabulary#Projects
 :Projects rdf:type owl:Class ;
           rdfs:subClassOf :ProjectScale .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#Proof
+###  http://purl.org/aiaontology/vcsvocabulary#Proof
 :Proof rdf:type owl:Class ;
        owl:equivalentClass [ rdf:type owl:Restriction ;
                              owl:onProperty :hasProof ;
                              owl:someValuesFrom :Proof
                            ] ;
-       rdfs:comment "Requirements require proof (evidence) as to their veracity."@en ;
+       rdfs:comment "FIX: how to capture that a Requirement is not met until Proof is provided?"@en ,
+                    "Requirements require proof (evidence) as to their veracity."@en ;
        <http://www.w3.org/2004/02/skos/core#altLabel> "Evidence"@en ;
-       <http://www.w3.org/2004/02/skos/core#prefLabel> "FIX: how to capture that a Requirement is not met until Proof is provided?"@en ,
-                                                       "Proof"@en ;
-       <http://www.w3.org/2004/02/skos/core#related> <http://www.semanticweb.org/lucia/ontologies/2023/0/aia#Claim> .
+       <http://www.w3.org/2004/02/skos/core#prefLabel> "Proof"@en ;
+       <http://www.w3.org/2004/02/skos/core#related> <http://purl.org/aiaontology#Claim> .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#REDD
+###  http://purl.org/aiaontology/vcsvocabulary#REDD
 :REDD rdf:type owl:Class ;
       rdfs:subClassOf :AFOLUProject ;
       <http://www.w3.org/2004/02/skos/core#altLabel> "REDD"@en ;
       <http://www.w3.org/2004/02/skos/core#prefLabel> "Reduced Emissions from Deforestation and Degradation (REDD)"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#Requirement
+###  http://purl.org/aiaontology/vcsvocabulary#Requirement
 :Requirement rdf:type owl:Class ;
-             rdfs:subClassOf <http://www.semanticweb.org/lucia/ontologies/2023/0/aia#Condition> .
+             rdfs:subClassOf <http://purl.org/aiaontology#Condition> .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#SectoralScope
-:SectoralScope rdf:type owl:Class ;
-               owl:equivalentClass cdmv:SectoralScope .
+###  http://purl.org/aiaontology/vcsvocabulary#SectoralScope
+:SectoralScope rdf:type owl:Class .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#WRC
+###  http://purl.org/aiaontology/vcsvocabulary#WRC
 :WRC rdf:type owl:Class ;
      rdfs:subClassOf :AFOLUProject ;
      <http://www.w3.org/2004/02/skos/core#altLabel> "WRC"@en ;
      <http://www.w3.org/2004/02/skos/core#prefLabel> "Wetlands Restoration and Conservation"@en .
 
 
+###  http://www.w3.org/ns/prov#endedAtTime
+<http://www.w3.org/ns/prov#endedAtTime> rdf:type owl:Class .
+
+
 #################################################################
 #    Individuals
 #################################################################
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#degradedWetland
+###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope1
+<http://purl.org/aiaontology/cdmvocabulary#sectoralScope1> rdf:type owl:NamedIndividual ;
+                                                           owl:sameAs :sectoralScope1 .
+
+
+###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope10
+<http://purl.org/aiaontology/cdmvocabulary#sectoralScope10> rdf:type owl:NamedIndividual ;
+                                                            owl:sameAs :sectoralScope10 .
+
+
+###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope11
+<http://purl.org/aiaontology/cdmvocabulary#sectoralScope11> rdf:type owl:NamedIndividual ;
+                                                            owl:sameAs :sectoralScope11 .
+
+
+###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope12
+<http://purl.org/aiaontology/cdmvocabulary#sectoralScope12> rdf:type owl:NamedIndividual ;
+                                                            owl:sameAs :sectoralScope12 .
+
+
+###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope13
+<http://purl.org/aiaontology/cdmvocabulary#sectoralScope13> rdf:type owl:NamedIndividual ;
+                                                            owl:sameAs :sectoralScope13 .
+
+
+###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope2
+<http://purl.org/aiaontology/cdmvocabulary#sectoralScope2> rdf:type owl:NamedIndividual ;
+                                                           owl:sameAs :sectoralScope2 .
+
+
+###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope3
+<http://purl.org/aiaontology/cdmvocabulary#sectoralScope3> rdf:type owl:NamedIndividual ;
+                                                           owl:sameAs :sectoralScope3 .
+
+
+###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope4
+<http://purl.org/aiaontology/cdmvocabulary#sectoralScope4> rdf:type owl:NamedIndividual ;
+                                                           owl:sameAs :sectoralScope4 .
+
+
+###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope5
+<http://purl.org/aiaontology/cdmvocabulary#sectoralScope5> rdf:type owl:NamedIndividual ;
+                                                           owl:sameAs :sectoralScope5 .
+
+
+###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope6
+<http://purl.org/aiaontology/cdmvocabulary#sectoralScope6> rdf:type owl:NamedIndividual ;
+                                                           owl:sameAs :sectoralScope6 .
+
+
+###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope7
+<http://purl.org/aiaontology/cdmvocabulary#sectoralScope7> rdf:type owl:NamedIndividual ;
+                                                           owl:sameAs :sectoralScope7 .
+
+
+###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope8
+<http://purl.org/aiaontology/cdmvocabulary#sectoralScope8> rdf:type owl:NamedIndividual ;
+                                                           owl:sameAs :sectoralScope8 .
+
+
+###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope9
+<http://purl.org/aiaontology/cdmvocabulary#sectoralScope9> rdf:type owl:NamedIndividual ;
+                                                           owl:sameAs :sectoralScope9 .
+
+
+###  http://purl.org/aiaontology/vcsvocabulary#degradedWetland
 :degradedWetland rdf:type owl:NamedIndividual ,
-                          <http://www.semanticweb.org/lucia/ontologies/2023/0/aia#Condition> ;
+                          <http://purl.org/aiaontology#Condition> ;
                  rdfs:comment "Degraded wetland (including, drained, impounded, and with interrupted sediment supply)"@en ;
                  rdfs:label "Degraded wetland"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#intactWetland
+###  http://purl.org/aiaontology/vcsvocabulary#intactWetland
 :intactWetland rdf:type owl:NamedIndividual ,
-                        <http://www.semanticweb.org/lucia/ontologies/2023/0/aia#Condition> ;
+                        <http://purl.org/aiaontology#Condition> ;
                rdfs:label "Intact wetland"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#nonWetlandOpenWater
+###  http://purl.org/aiaontology/vcsvocabulary#nonWetlandOpenWater
 :nonWetlandOpenWater rdf:type owl:NamedIndividual ,
-                              <http://www.semanticweb.org/lucia/ontologies/2023/0/aia#Condition> ;
+                              <http://purl.org/aiaontology#Condition> ;
                      rdfs:label "Non-wetland or open water"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#sectoralScope1
+###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope1
 :sectoralScope1 rdf:type owl:NamedIndividual ,
                          :SectoralScope ;
-                rdfs:label "Energy (renewable/non-renewable)"@en ;
-                owl:sameAs cdmv:sectoralScope1 .
+                rdfs:label "Energy (renewable/non-renewable)"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#sectoralScope10
+###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope10
 :sectoralScope10 rdf:type owl:NamedIndividual ,
                           :SectoralScope ;
-                 rdfs:label "Fugitive emissions – from fuels (solid, oil, and gas)"@en ;
-                 owl:sameAs cdmv:sectoralScope10 .
+                 rdfs:label "Fugitive emissions – from fuels (solid, oil, and gas)"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#sectoralScope11
+###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope11
 :sectoralScope11 rdf:type owl:NamedIndividual ,
                           :SectoralScope ;
-                 rdfs:label "Fugitive emissions – from Industrial gases (halocarbons and sulphur hexafluoride)"@en ;
-                 owl:sameAs cdmv:sectoralScope11 .
+                 rdfs:label "Fugitive emissions – from Industrial gases (halocarbons and sulphur hexafluoride)"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#sectoralScope12
+###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope12
 :sectoralScope12 rdf:type owl:NamedIndividual ,
                           :SectoralScope ;
-                 rdfs:label "Solvents use"@en ;
-                 owl:sameAs cdmv:sectoralScope12 .
+                 rdfs:label "Solvents use"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#sectoralScope13
+###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope13
 :sectoralScope13 rdf:type owl:NamedIndividual ,
                           :SectoralScope ;
-                 rdfs:label "Waste handling and disposal"@en ;
-                 owl:sameAs cdmv:sectoralScope13 .
+                 rdfs:label "Waste handling and disposal"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#sectoralScope14
+###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope14
 :sectoralScope14 rdf:type owl:NamedIndividual ,
                           :SectoralScope ;
                  rdfs:label "Agriculture, forestry and other land use"@en ;
                  <http://www.w3.org/2004/02/skos/core#altLabel> "AFOLU"@en ;
-                 <http://www.w3.org/2004/02/skos/core#related> cdmv:sectoralScope14 .
+                 <http://www.w3.org/2004/02/skos/core#related> <http://purl.org/aiaontology/cdmvocabulary#sectoralScope14> .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#sectoralScope15
+###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope15
 :sectoralScope15 rdf:type owl:NamedIndividual ,
                           :SectoralScope ;
                  rdfs:label "Livestock and manure management"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#sectoralScope16
+###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope16
 :sectoralScope16 rdf:type owl:NamedIndividual ,
                           :SectoralScope ;
                  rdfs:label "Carbon capture and storage"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#sectoralScope2
+###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope2
 :sectoralScope2 rdf:type owl:NamedIndividual ,
                          :SectoralScope ;
-                rdfs:label "Energy distribution"@en ;
-                owl:sameAs cdmv:sectoralScope2 .
+                rdfs:label "Energy distribution"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#sectoralScope3
+###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope3
 :sectoralScope3 rdf:type owl:NamedIndividual ,
                          :SectoralScope ;
-                rdfs:label "Energy demand"@en ;
-                owl:sameAs cdmv:sectoralScope3 .
+                rdfs:label "Energy demand"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#sectoralScope4
+###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope4
 :sectoralScope4 rdf:type owl:NamedIndividual ,
                          :SectoralScope ;
-                rdfs:label "Manufacturing industries"@en ;
-                owl:sameAs cdmv:sectoralScope4 .
+                rdfs:label "Manufacturing industries"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#sectoralScope5
+###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope5
 :sectoralScope5 rdf:type owl:NamedIndividual ,
                          :SectoralScope ;
-                rdfs:label "Chemical industry"@en ;
-                owl:sameAs cdmv:sectoralScope5 .
+                rdfs:label "Chemical industry"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#sectoralScope6
+###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope6
 :sectoralScope6 rdf:type owl:NamedIndividual ,
                          :SectoralScope ;
-                rdfs:label "Construction"@en ;
-                owl:sameAs cdmv:sectoralScope6 .
+                rdfs:label "Construction"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#sectoralScope7
+###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope7
 :sectoralScope7 rdf:type owl:NamedIndividual ,
                          :SectoralScope ;
-                rdfs:label "Transport"@en ;
-                owl:sameAs cdmv:sectoralScope7 .
+                rdfs:label "Transport"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#sectoralScope8
+###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope8
 :sectoralScope8 rdf:type owl:NamedIndividual ,
                          :SectoralScope ;
-                rdfs:label "Mining/Mineral production"@en ;
-                owl:sameAs cdmv:sectoralScope8 .
+                rdfs:label "Mining/Mineral production"@en .
 
 
-###  http://www.semanticweb.org/lucia/ontologies/2023/0/vcsvocabulary#sectoralScope9
+###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope9
 :sectoralScope9 rdf:type owl:NamedIndividual ,
                          :SectoralScope ;
-                rdfs:label "Metal production"@en ;
-                owl:sameAs cdmv:sectoralScope9 .
+                rdfs:label "Metal production"@en .
 
 
 #################################################################
