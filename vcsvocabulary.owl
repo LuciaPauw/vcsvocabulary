@@ -1,11 +1,15 @@
 @prefix : <http://purl.org/aiaontology/vcsvocabulary#> .
+@prefix aia: <http://purl.org/aiaontology#> .
+@prefix cdmv: <http://purl.org/aiaontology/cdmvocabulary#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix cdmv: <http://www.semanticweb.org/lucia/ontologies/2023/0/cdmvocabulary#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://purl.org/aiaontology/vcsvocabulary> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@base <http://purl.org/aiaontology/vcsvocabulary#> .
 
 <http://purl.org/aiaontology/vcsvocabulary> rdf:type owl:Ontology .
 
@@ -34,23 +38,15 @@ owl:sameAs rdf:type owl:AnnotationProperty .
 
 
 ###  http://www.w3.org/2004/02/skos/core#altLabel
-<http://www.w3.org/2004/02/skos/core#altLabel> rdf:type owl:AnnotationProperty .
-
-
-###  http://www.w3.org/2004/02/skos/core#broader
-<http://www.w3.org/2004/02/skos/core#broader> rdf:type owl:AnnotationProperty .
-
-
-###  http://www.w3.org/2004/02/skos/core#narrower
-<http://www.w3.org/2004/02/skos/core#narrower> rdf:type owl:AnnotationProperty .
+skos:altLabel rdf:type owl:AnnotationProperty .
 
 
 ###  http://www.w3.org/2004/02/skos/core#prefLabel
-<http://www.w3.org/2004/02/skos/core#prefLabel> rdf:type owl:AnnotationProperty .
+skos:prefLabel rdf:type owl:AnnotationProperty .
 
 
 ###  http://www.w3.org/2004/02/skos/core#related
-<http://www.w3.org/2004/02/skos/core#related> rdf:type owl:AnnotationProperty .
+skos:related rdf:type owl:AnnotationProperty .
 
 
 #################################################################
@@ -59,8 +55,8 @@ owl:sameAs rdf:type owl:AnnotationProperty .
 
 ###  http://purl.org/aiaontology/vcsvocabulary#GWP
 :GWP rdf:type rdfs:Datatype ;
-     rdfs:comment "All GHG emission reductions and removals shall be converted to CO2e using GWP values."@en ;
-     rdfs:label "100-year Global Warming Potential"@en .
+    rdfs:comment "All GHG emission reductions and removals shall be converted to CO2e using GWP values."@en ;
+    rdfs:label "100-year Global Warming Potential"@en .
 
 
 #################################################################
@@ -69,55 +65,53 @@ owl:sameAs rdf:type owl:AnnotationProperty .
 
 ###  http://purl.org/aiaontology/vcsvocabulary#deviatesFrom
 :deviatesFrom rdf:type owl:ObjectProperty ;
-              rdfs:domain :Project ;
-              rdfs:range :Methodology ,
-                         :ProjectDescription .
+    rdfs:domain :Project ;
+    rdfs:range :Methodology ,
+        :ProjectDescription .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#hasCondition
 :hasCondition rdf:type owl:ObjectProperty ;
-              rdfs:range <http://purl.org/aiaontology#Condition> ;
-              rdfs:comment "die condition is dat 'n activity some monitoring plan het"@af .
-
+    rdfs:range aia:Condition .
 
 ###  http://purl.org/aiaontology/vcsvocabulary#hasProof
 :hasProof rdf:type owl:ObjectProperty ;
-          rdfs:domain :Requirement ;
-          rdfs:range :Proof .
+    rdfs:domain :Requirement ;
+    rdfs:range :Proof .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#hasSafeguard
 :hasSafeguard rdf:type owl:ObjectProperty ;
-              owl:inverseOf :safeguardFor ;
-              rdfs:domain <http://purl.org/aiaontology#Activity> ;
-              rdfs:range :Safeguards .
+    owl:inverseOf :safeguardFor ;
+    rdfs:domain aia:Activity ;
+    rdfs:range :Safeguards .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#meetsRequirement
 :meetsRequirement rdf:type owl:ObjectProperty ;
-                  rdfs:domain :Project ;
-                  rdfs:range :Requirement .
+    rdfs:domain :Project ;
+    rdfs:range :Requirement .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#participatesUnderOtherGHGProgram
 :participatesUnderOtherGHGProgram rdf:type owl:ObjectProperty ;
-                                  rdfs:domain :Project ;
-                                  rdfs:range <http://purl.org/aiaontology#Procedure> ;
-                                  :requirementID """3.22.1 - 3.22.4
-AFOLU Projects: 3.22.5"""@en .
+    rdfs:domain :Project ;
+    rdfs:range aia:Procedure ;
+    :requirementID """3.22.1 - 3.22.4
+        AFOLU Projects: 3.22.5"""@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#safeguardFor
 :safeguardFor rdf:type owl:ObjectProperty ;
-              rdfs:domain :Safeguards ;
-              rdfs:range <http://purl.org/aiaontology#Activity> .
+    rdfs:domain :Safeguards ;
+    rdfs:range aia:Activity .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#stakeholderConsultedIn
 :stakeholderConsultedIn rdf:type owl:ObjectProperty ;
-                        rdfs:subPropertyOf :hasCondition ;
-                        rdfs:domain :Stakeholder ;
-                        rdfs:range :StakeholderConsultation .
+    rdfs:subPropertyOf :hasCondition ;
+    rdfs:domain :Stakeholder ;
+    rdfs:range :StakeholderConsultation .
 
 
 #################################################################
@@ -126,18 +120,13 @@ AFOLU Projects: 3.22.5"""@en .
 
 ###  http://purl.org/aiaontology/vcsvocabulary#hasGWP
 :hasGWP rdf:type owl:DatatypeProperty ;
-        rdfs:range :GWP ;
-        rdfs:seeAlso <https://www.ipcc.ch/site/assets/uploads/2018/02/WG1AR5_Chapter08_FINAL.pdf#page=73> .
+    rdfs:range :GWP ;
+    rdfs:seeAlso <https://www.ipcc.ch/site/assets/uploads/2018/02/WG1AR5_Chapter08_FINAL.pdf#page=73> .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#requirementHasDefinition
 :requirementHasDefinition rdf:type owl:DatatypeProperty ;
-                          rdfs:comment "FIX: one possible way to handle VCS Requirements. Another relevant question is perhaps if it is even necessary to incorporate these specific requirements into the vocabulary."@en .
-
-
-###  http://purl.org/aiaontology/vcsvocabulary#toets
-:toets rdf:type owl:DatatypeProperty ;
-       rdfs:range xsd:boolean .
+    rdfs:comment "FIX: one possible way to handle VCS Requirements. Another relevant question is perhaps if it is even necessary to incorporate these specific requirements into the vocabulary."@en .
 
 
 #################################################################
@@ -145,156 +134,156 @@ AFOLU Projects: 3.22.5"""@en .
 #################################################################
 
 ###  http://purl.org/aiaontology#Activity
-<http://purl.org/aiaontology#Activity> rdf:type owl:Class ;
-                                       owl:equivalentClass :Project .
+aia:Activity rdf:type owl:Class ;
+    owl:equivalentClass :Project .
 
 
 ###  http://purl.org/aiaontology#Agent
-<http://purl.org/aiaontology#Agent> rdf:type owl:Class .
+aia:Agent rdf:type owl:Class .
 
 
 ###  http://purl.org/aiaontology#Claim
-<http://purl.org/aiaontology#Claim> rdf:type owl:Class .
+aia:Claim rdf:type owl:Class .
 
 
 ###  http://purl.org/aiaontology#Condition
-<http://purl.org/aiaontology#Condition> rdf:type owl:Class ;
-                                        rdfs:comment "The instances of this class illustrate the types of WRC activities that may be combined with other AFOLU project categories."@en .
+aia:Condition rdf:type owl:Class ;
+    rdfs:comment "The instances of this class illustrate the types of WRC activities that may be combined with other AFOLU project categories."@en .
 
 
 ###  http://purl.org/aiaontology#Control
-<http://purl.org/aiaontology#Control> rdf:type owl:Class .
+aia:Control rdf:type owl:Class .
 
 
 ###  http://purl.org/aiaontology#CreditingPeriod
-<http://purl.org/aiaontology#CreditingPeriod> rdf:type owl:Class ;
-                                              owl:equivalentClass :ProjectCreditingPeriod .
+aia:CreditingPeriod rdf:type owl:Class ;
+    owl:equivalentClass :ProjectCreditingPeriod .
 
 
 ###  http://purl.org/aiaontology#Period
-<http://purl.org/aiaontology#Period> rdf:type owl:Class .
+aia:Period rdf:type owl:Class .
 
 
 ###  http://purl.org/aiaontology#Procedure
-<http://purl.org/aiaontology#Procedure> rdf:type owl:Class ;
-                                        owl:equivalentClass :Methodology .
+aia:Procedure rdf:type owl:Class ;
+    owl:equivalentClass :Methodology .
 
 
 ###  http://purl.org/aiaontology#State
-<http://purl.org/aiaontology#State> rdf:type owl:Class .
+aia:State rdf:type owl:Class .
 
 
 ###  http://purl.org/aiaontology/cdmvocabulary#BaselineScenario
-<http://purl.org/aiaontology/cdmvocabulary#BaselineScenario> rdf:type owl:Class ;
-                                                             owl:equivalentClass :BaselineScenario .
+cdmv:BaselineScenario rdf:type owl:Class ;
+    owl:equivalentClass :BaselineScenario .
 
 
 ###  http://purl.org/aiaontology/cdmvocabulary#SectoralScope
-<http://purl.org/aiaontology/cdmvocabulary#SectoralScope> rdf:type owl:Class ;
-                                                          owl:equivalentClass :SectoralScope .
+cdmv:SectoralScope rdf:type owl:Class ;
+    owl:equivalentClass :SectoralScope .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#ACoGS
 :ACoGS rdf:type owl:Class ;
        rdfs:subClassOf :AFOLUProject ;
-       <http://www.w3.org/2004/02/skos/core#altLabel> "ACoGS"@en ;
-       <http://www.w3.org/2004/02/skos/core#prefLabel> "Avoided Conversion of Grasslands and Shrublands"@en .
+       skos:altLabel "ACoGS"@en ;
+       skos:prefLabel "Avoided Conversion of Grasslands and Shrublands"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#AFOLUProject
 :AFOLUProject rdf:type owl:Class ;
-              owl:equivalentClass [ rdf:type owl:Restriction ;
-                                    owl:onProperty :hasSafeguard ;
-                                    owl:someValuesFrom :StakeholderIdentification
-                                  ] ;
-              rdfs:subClassOf :Project ;
-              rdfs:label "Agriculture, Forestry, and Other Land Use Projects"@en .
+    owl:equivalentClass [ rdf:type owl:Restriction ;
+        owl:onProperty :hasSafeguard ;
+        owl:someValuesFrom :StakeholderIdentification
+        ] ;
+    rdfs:subClassOf :Project ;
+    rdfs:label "Agriculture, Forestry, and Other Land Use Projects"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#ALM
 :ALM rdf:type owl:Class ;
-     rdfs:subClassOf :AFOLUProject ;
-     <http://www.w3.org/2004/02/skos/core#altLabel> "ALM"@en ;
-     <http://www.w3.org/2004/02/skos/core#prefLabel> "Agricultural Land Management"@en .
+        rdfs:subClassOf :AFOLUProject ;
+        skos:altLabel "ALM"@en ;
+        skos:prefLabel "Agricultural Land Management"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#ARR
 :ARR rdf:type owl:Class ;
-     rdfs:subClassOf :AFOLUProject ;
-     <http://www.w3.org/2004/02/skos/core#altLabel> "ARR"@en ;
-     <http://www.w3.org/2004/02/skos/core#prefLabel> "Afforestation, Reforestation and Revegetation"@en .
+    rdfs:subClassOf :AFOLUProject ;
+    skos:altLabel "ARR"@en ;
+    skos:prefLabel "Afforestation, Reforestation and Revegetation"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#ApprovedGHGPrograms
 :ApprovedGHGPrograms rdf:type owl:Class ;
-                     rdfs:subClassOf <http://purl.org/aiaontology#Procedure> ;
-                     owl:disjointWith :OtherGHGPrograms .
+    rdfs:subClassOf aia:Procedure ;
+    owl:disjointWith :OtherGHGPrograms .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#BaselineScenario
 :BaselineScenario rdf:type owl:Class ;
-                  rdfs:subClassOf <http://purl.org/aiaontology#State> .
+    rdfs:subClassOf aia:State .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#CH4
 :CH4 rdf:type owl:Class ;
-     rdfs:subClassOf :GHG ,
-                     [ rdf:type owl:Restriction ;
-                       owl:onProperty :hasGWP ;
-                       owl:allValuesFrom [ rdf:type rdfs:Datatype ;
-                                           owl:onDatatype xsd:double ;
-                                           owl:withRestrictions ( [ xsd:minInclusive "28.0"^^xsd:double
-                                                                  ]
-                                                                  [ xsd:maxInclusive "28.0"^^xsd:double
-                                                                  ]
-                                                                )
-                                         ]
-                     ] ;
+    rdfs:subClassOf :GHG ,
+        [ rdf:type owl:Restriction ;
+            owl:onProperty :hasGWP ;
+            owl:allValuesFrom [ rdf:type rdfs:Datatype ;
+            owl:onDatatype xsd:double ;
+            owl:withRestrictions ( [ xsd:minInclusive "28.0"^^xsd:double
+                ]
+                [ xsd:maxInclusive "28.0"^^xsd:double
+                ]
+            )
+            ]
+        ] ;
      rdfs:label "Methane"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#CO2
 :CO2 rdf:type owl:Class ;
-     rdfs:subClassOf :GHG ,
-                     [ rdf:type owl:Restriction ;
-                       owl:onProperty :hasGWP ;
-                       owl:allValuesFrom [ rdf:type rdfs:Datatype ;
-                                           owl:onDatatype xsd:double ;
-                                           owl:withRestrictions ( [ xsd:minInclusive "1.0"^^xsd:double
-                                                                  ]
-                                                                  [ xsd:maxInclusive "1.0"^^xsd:double
-                                                                  ]
-                                                                )
-                                         ]
-                     ] ;
-     rdfs:label "Carbon dioxide"@en .
+    rdfs:subClassOf :GHG ,
+    [ rdf:type owl:Restriction ;
+    owl:onProperty :hasGWP ;
+    owl:allValuesFrom [ rdf:type rdfs:Datatype ;
+    owl:onDatatype xsd:double ;
+    owl:withRestrictions ( [ xsd:minInclusive "1.0"^^xsd:double
+            ]
+            [ xsd:maxInclusive "1.0"^^xsd:double
+            ]
+        )
+    ]
+    ] ;
+rdfs:label "Carbon dioxide"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#CommunicationAndConsultation
 :CommunicationAndConsultation rdf:type owl:Class ;
-                              owl:equivalentClass [ rdf:type owl:Restriction ;
-                                                    owl:onProperty :safeguardFor ;
-                                                    owl:allValuesFrom :AFOLUProject
-                                                  ] ;
-                              rdfs:subClassOf :Safeguards ;
-                              :requirementID "3.18.18 - 3.18.20"@en .
+    owl:equivalentClass [ rdf:type owl:Restriction ;
+        owl:onProperty :safeguardFor ;
+        owl:allValuesFrom :AFOLUProject
+    ] ;
+    rdfs:subClassOf :Safeguards ;
+    :requirementID "3.18.18 - 3.18.20"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#GHG
 :GHG rdf:type owl:Class ;
-     rdfs:label "Greenhouse gas"@en .
+    rdfs:label "Greenhouse gas"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#IFM
 :IFM rdf:type owl:Class ;
-     rdfs:subClassOf :AFOLUProject ;
-     <http://www.w3.org/2004/02/skos/core#altLabel> "IFM"@en ;
-     <http://www.w3.org/2004/02/skos/core#prefLabel> "Improved Forest Management"@en .
+    rdfs:subClassOf :AFOLUProject ;
+    skos:altLabel "IFM"@en ;
+    skos:prefLabel "Improved Forest Management"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#LargeProjects
 :LargeProjects rdf:type owl:Class ;
-               rdfs:subClassOf :ProjectScale .
+    rdfs:subClassOf :ProjectScale .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#Methodology
@@ -303,61 +292,61 @@ AFOLU Projects: 3.22.5"""@en .
 
 ###  http://purl.org/aiaontology/vcsvocabulary#MethodologyDeviation
 :MethodologyDeviation rdf:type owl:Class ;
-                      rdfs:subClassOf <http://purl.org/aiaontology#Claim> ;
-                      rdfs:comment "NOTE: a Project may be stated to deviate from a Methodology, with valid reason (3.19.1 - 3.19.3). Providing justification that these Requirements are met will be the verification for these Claims."@en .
+    rdfs:subClassOf aia:Claim ;
+    rdfs:comment "NOTE: a Project may be stated to deviate from a Methodology, with valid reason (3.19.1 - 3.19.3). Providing justification that these Requirements are met will be the verification for these Claims."@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#MethodologyGracePeriod
 :MethodologyGracePeriod rdf:type owl:Class ;
-                        rdfs:subClassOf <http://purl.org/aiaontology#Period> ;
-                        :requirementID "3.21.1 - 3.21.3"@en ;
-                        rdfs:comment "A methodology grace period is the amount of time in which projects may apply a methodology, module or tool that has been revised, newly excluded or becomes inactive. The grace period deadline corresponds with the date the validation report (for registration and crediting period renewal) or verification report (for baseline reassessment) is issued."@en .
+    rdfs:subClassOf aia:Period ;
+    :requirementID "3.21.1 - 3.21.3"@en ;
+    rdfs:comment "A methodology grace period is the amount of time in which projects may apply a methodology, module or tool that has been revised, newly excluded or becomes inactive. The grace period deadline corresponds with the date the validation report (for registration and crediting period renewal) or verification report (for baseline reassessment) is issued."@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#Monitoring
 :Monitoring rdf:type owl:Class ;
-            rdfs:subClassOf <http://purl.org/aiaontology#Activity> ;
-            rdfs:comment "The impacts of project activities on relevant emission sources, sinks, and reservoirs must be monitored in order to determine the net GHG benefit. Projects must be monitored in accordance with the applied methodology(s)"@en .
+    rdfs:subClassOf aia:Activity ;
+    rdfs:comment "The impacts of project activities on relevant emission sources, sinks, and reservoirs must be monitored in order to determine the net GHG benefit. Projects must be monitored in accordance with the applied methodology(s)"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#MonitoringPlan
 :MonitoringPlan rdf:type owl:Class ;
-                rdfs:subClassOf <http://purl.org/aiaontology#Claim> .
+    rdfs:subClassOf aia:Claim .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#N20
 :N20 rdf:type owl:Class ;
-     rdfs:subClassOf :GHG ,
-                     [ rdf:type owl:Restriction ;
-                       owl:onProperty :hasGWP ;
-                       owl:allValuesFrom [ rdf:type rdfs:Datatype ;
-                                           owl:onDatatype xsd:double ;
-                                           owl:withRestrictions ( [ xsd:minInclusive "265.0"^^xsd:double
-                                                                  ]
-                                                                  [ xsd:maxInclusive "265.0"^^xsd:double
-                                                                  ]
-                                                                )
-                                         ]
-                     ] ;
-     rdfs:label "Nitrous oxide"@en .
+    rdfs:subClassOf :GHG ,
+    [ rdf:type owl:Restriction ;
+    owl:onProperty :hasGWP ;
+    owl:allValuesFrom [ rdf:type rdfs:Datatype ;
+    owl:onDatatype xsd:double ;
+        owl:withRestrictions ( [ xsd:minInclusive "265.0"^^xsd:double
+        ]
+        [ xsd:maxInclusive "265.0"^^xsd:double
+        ]
+        )
+    ]
+    ] ;
+    rdfs:label "Nitrous oxide"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#NoNetHarm
 :NoNetHarm rdf:type owl:Class ;
-           rdfs:subClassOf <http://purl.org/aiaontology#Activity> ,
-                           :Safeguards ;
-           :requirementID "3.18.12"@en .
+    rdfs:subClassOf aia:Activity ,
+        :Safeguards ;
+    :requirementID "3.18.12"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#ODSProject
 :ODSProject rdf:type owl:Class ;
-            rdfs:subClassOf :Project ;
-            rdfs:label "Ozone-Depleting Substances Project"@en .
+    rdfs:subClassOf :Project ;
+    rdfs:label "Ozone-Depleting Substances Project"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#OtherGHGPrograms
 :OtherGHGPrograms rdf:type owl:Class ;
-                  rdfs:subClassOf <http://purl.org/aiaontology#Procedure> .
+    rdfs:subClassOf aia:Procedure .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#Project
@@ -366,109 +355,109 @@ AFOLU Projects: 3.22.5"""@en .
 
 ###  http://purl.org/aiaontology/vcsvocabulary#ProjectBoundary
 :ProjectBoundary rdf:type owl:Class ;
-                 rdfs:comment "The project boundary includes the GHG sources, sinks, and reservoirs that are relevant to the project and baseline scenarios. The relevant GHG sources, sinks, and reservoirs that must be included or excluded, or are optional, are set out in the methodology(s) applied by the project."@en ;
-                 <http://www.w3.org/2004/02/skos/core#related> <http://purl.org/aiaontology#Parameter> ,
-                                                               <http://purl.org/aiaontology/cdmvocabulary#ProjectBoundary> .
+    rdfs:comment "The project boundary includes the GHG sources, sinks, and reservoirs that are relevant to the project and baseline scenarios. The relevant GHG sources, sinks, and reservoirs that must be included or excluded, or are optional, are set out in the methodology(s) applied by the project."@en ;
+    skos:related aia:Parameter ,
+    cdmv:ProjectBoundary .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#ProjectCreditingPeriod
 :ProjectCreditingPeriod rdf:type owl:Class ;
-                        rdfs:isDefinedBy "The project crediting period is the time period for which GHG emission reductions or removals generated by the project are eligible for issuance as VCUs. Project crediting periods must be renewed periodically in order to ensure that changes to a project’s baseline scenario and regulatory surplus are taken into consideration throughout the lifetime of the project."@en ;
-                        rdfs:label "Project Crediting Period"@en .
+    rdfs:isDefinedBy "The project crediting period is the time period for which GHG emission reductions or removals generated by the project are eligible for issuance as VCUs. Project crediting periods must be renewed periodically in order to ensure that changes to a project’s baseline scenario and regulatory surplus are taken into consideration throughout the lifetime of the project."@en ;
+    rdfs:label "Project Crediting Period"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#ProjectDescription
 :ProjectDescription rdf:type owl:Class ;
-                    rdfs:subClassOf <http://purl.org/aiaontology#Claim> .
+    rdfs:subClassOf aia:Claim .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#ProjectDeviations
 :ProjectDeviations rdf:type owl:Class ;
-                   rdfs:subClassOf <http://purl.org/aiaontology#Claim> .
+                   rdfs:subClassOf aia:Claim .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#ProjectScale
 :ProjectScale rdf:type owl:Class ;
-              rdfs:comment """Projects are categorized by size according to their estimated average annual GHG emission reductions or removals. Materiality thresholds differ for projects of different sizes.
-    1) Projects: Less than or equal to 300,000 tonnes of CO2e per year.
-    2) Large projects: Greater than 300,000 tonnes of CO2e per year."""@en .
+    rdfs:comment """Projects are categorized by size according to their estimated average annual GHG emission reductions or removals. Materiality thresholds differ for projects of different sizes.
+        1) Projects: Less than or equal to 300,000 tonnes of CO2e per year.
+        2) Large projects: Greater than 300,000 tonnes of CO2e per year."""@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#ProjectStartDate
 :ProjectStartDate rdf:type owl:Class ;
-                  owl:equivalentClass <http://www.w3.org/ns/prov#startedAtTime> ;
-                  rdfs:comment "The project start date of a non-AFOLU project is the date on which the project began generating GHG emission reductions or removals. The project start date of an AFOLU project is the date on which activities that led to the generation of GHG emission reductions or removals are implemented (e.g., preparing land for seeding, planting, changing agricultural or forestry practices, rewetting, restoring hydrological functions, or implementing management or protection plans). Projects must complete validation within specific timeframes from the project start date."@en .
+    owl:equivalentClass prov:startedAtTime ;
+    rdfs:comment "The project start date of a non-AFOLU project is the date on which the project began generating GHG emission reductions or removals. The project start date of an AFOLU project is the date on which activities that led to the generation of GHG emission reductions or removals are implemented (e.g., preparing land for seeding, planting, changing agricultural or forestry practices, rewetting, restoring hydrological functions, or implementing management or protection plans). Projects must complete validation within specific timeframes from the project start date."@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#Projects
 :Projects rdf:type owl:Class ;
-          rdfs:subClassOf :ProjectScale .
+    rdfs:subClassOf :ProjectScale .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#Proof
 :Proof rdf:type owl:Class ;
-       owl:equivalentClass [ rdf:type owl:Restriction ;
-                             owl:onProperty :hasProof ;
-                             owl:someValuesFrom :Proof
-                           ] ;
-       rdfs:comment "FIX: how to capture that a Requirement is not met until Proof is provided?"@en ,
-                    "Requirements require proof (evidence) as to their veracity."@en ;
-       <http://www.w3.org/2004/02/skos/core#altLabel> "Evidence"@en ;
-       <http://www.w3.org/2004/02/skos/core#prefLabel> "Proof"@en ;
-       <http://www.w3.org/2004/02/skos/core#related> <http://purl.org/aiaontology#Claim> .
+    owl:equivalentClass [ rdf:type owl:Restriction ;
+        owl:onProperty :hasProof ;
+        owl:someValuesFrom :Proof
+    ] ;
+    rdfs:comment "FIX: how to capture that a Requirement is not met until Proof is provided?"@en ,
+        "Requirements require proof (evidence) as to their veracity."@en ;
+    skos:altLabel "Evidence"@en ;
+    skos:prefLabel "Proof"@en ;
+    skos:related aia:Claim .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#PublicCommentPeriod
 :PublicCommentPeriod rdf:type owl:Class ;
-                     rdfs:subClassOf <http://purl.org/aiaontology#Period> ,
-                                     :Safeguards ;
-                     :requirementID "3.18.6 - 3.18.10"@en .
+    rdfs:subClassOf aia:Period ,
+        :Safeguards ;
+    :requirementID "3.18.6 - 3.18.10"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#REDD
 :REDD rdf:type owl:Class ;
-      rdfs:subClassOf :AFOLUProject ;
-      <http://www.w3.org/2004/02/skos/core#altLabel> "REDD"@en ;
-      <http://www.w3.org/2004/02/skos/core#prefLabel> "Reduced Emissions from Deforestation and Degradation (REDD)"@en .
+    rdfs:subClassOf :AFOLUProject ;
+    skos:altLabel "REDD"@en ;
+    skos:prefLabel "Reduced Emissions from Deforestation and Degradation (REDD)"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#RejectedProject
 :RejectedProject rdf:type owl:Class ;
-                 rdfs:subClassOf :Project ;
-                 :requirementID "3.22.11"@en ;
-                 rdfs:comment "Projects rejected by other GHG programs due to procedural or eligibility requirements can be considered under the VCS Program"@en .
+    rdfs:subClassOf :Project ;
+    :requirementID "3.22.11"@en ;
+    rdfs:comment "Projects rejected by other GHG programs due to procedural or eligibility requirements can be considered under the VCS Program"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#Requirement
 :Requirement rdf:type owl:Class ;
-             rdfs:subClassOf <http://purl.org/aiaontology#Condition> .
+    rdfs:subClassOf aia:Condition .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#RespectForStakeholderResources
 :RespectForStakeholderResources rdf:type owl:Class ;
-                                owl:equivalentClass [ rdf:type owl:Restriction ;
-                                                      owl:onProperty :safeguardFor ;
-                                                      owl:allValuesFrom :AFOLUProject
-                                                    ] ;
-                                rdfs:subClassOf :Safeguards ;
-                                :requirementID "3.18.17"@en .
+    owl:equivalentClass [ rdf:type owl:Restriction ;
+        owl:onProperty :safeguardFor ;
+        owl:allValuesFrom :AFOLUProject
+    ] ;
+    rdfs:subClassOf :Safeguards ;
+    :requirementID "3.18.17"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#RisksToStakeholders
 :RisksToStakeholders rdf:type owl:Class ;
-                     owl:equivalentClass [ rdf:type owl:Restriction ;
-                                           owl:onProperty :safeguardFor ;
-                                           owl:allValuesFrom :AFOLUProject
-                                         ] ;
-                     rdfs:subClassOf :Safeguards ;
-                     :requirementID "3.18.13 - 3.18.16"@en .
+    owl:equivalentClass [ rdf:type owl:Restriction ;
+        owl:onProperty :safeguardFor ;
+        owl:allValuesFrom :AFOLUProject
+    ] ;
+    rdfs:subClassOf :Safeguards ;
+    :requirementID "3.18.13 - 3.18.16"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#Safeguards
 :Safeguards rdf:type owl:Class ;
-            rdfs:subClassOf <http://purl.org/aiaontology#Control> ;
-            rdfs:comment "NOTE: Agents can now Claim that they have complied with these specific Safeguards."@en ,
-                         "Project activities must not negatively impact the natural environment or local communities. Project proponents must identify and address any negative environmental and socio-economic impacts of project activities, and must engage with local stakeholders during the project development and implementation processes."@en .
+    rdfs:subClassOf aia:Control ;
+    rdfs:comment "NOTE: Agents can now Claim that they have complied with these specific Safeguards."@en ,
+        "Project activities must not negatively impact the natural environment or local communities. Project proponents must identify and address any negative environmental and socio-economic impacts of project activities, and must engage with local stakeholders during the project development and implementation processes."@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#SectoralScope
@@ -477,36 +466,36 @@ AFOLU Projects: 3.22.5"""@en .
 
 ###  http://purl.org/aiaontology/vcsvocabulary#Stakeholder
 :Stakeholder rdf:type owl:Class ;
-             rdfs:subClassOf <http://purl.org/aiaontology#Agent> .
+             rdfs:subClassOf aia:Agent .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#StakeholderConsultation
 :StakeholderConsultation rdf:type owl:Class ;
-                         rdfs:subClassOf <http://purl.org/aiaontology#Activity> ,
-                                         :Safeguards ;
-                         :requirementID "3.18.3"@en .
+    rdfs:subClassOf aia:Activity ,
+        :Safeguards ;
+    :requirementID "3.18.3"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#StakeholderIdentification
 :StakeholderIdentification rdf:type owl:Class ;
-                           owl:equivalentClass [ rdf:type owl:Restriction ;
-                                                 owl:onProperty :safeguardFor ;
-                                                 owl:allValuesFrom :AFOLUProject
-                                               ] ;
-                           rdfs:subClassOf <http://purl.org/aiaontology#Activity> ,
-                                           :Safeguards ;
-                           :requirementID "3.18.12"@en .
+    owl:equivalentClass [ rdf:type owl:Restriction ;
+        owl:onProperty :safeguardFor ;
+        owl:allValuesFrom :AFOLUProject
+    ] ;
+    rdfs:subClassOf aia:Activity ,
+        :Safeguards ;
+    :requirementID "3.18.12"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#WRC
 :WRC rdf:type owl:Class ;
      rdfs:subClassOf :AFOLUProject ;
-     <http://www.w3.org/2004/02/skos/core#altLabel> "WRC"@en ;
-     <http://www.w3.org/2004/02/skos/core#prefLabel> "Wetlands Restoration and Conservation"@en .
+     skos:altLabel "WRC"@en ;
+     skos:prefLabel "Wetlands Restoration and Conservation"@en .
 
 
 ###  http://www.w3.org/ns/prov#startedAtTime
-<http://www.w3.org/ns/prov#startedAtTime> rdf:type owl:Class .
+prov:startedAtTime rdf:type owl:Class .
 
 
 #################################################################
@@ -514,185 +503,185 @@ AFOLU Projects: 3.22.5"""@en .
 #################################################################
 
 ###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope1
-<http://purl.org/aiaontology/cdmvocabulary#sectoralScope1> rdf:type owl:NamedIndividual ;
-                                                           owl:sameAs :sectoralScope1 .
+cdmv:sectoralScope1 rdf:type owl:NamedIndividual ;
+    owl:sameAs :sectoralScope1 .
 
 
 ###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope10
-<http://purl.org/aiaontology/cdmvocabulary#sectoralScope10> rdf:type owl:NamedIndividual ;
-                                                            owl:sameAs :sectoralScope10 .
+cdmv:sectoralScope10 rdf:type owl:NamedIndividual ;
+    owl:sameAs :sectoralScope10 .
 
 
 ###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope11
-<http://purl.org/aiaontology/cdmvocabulary#sectoralScope11> rdf:type owl:NamedIndividual ;
-                                                            owl:sameAs :sectoralScope11 .
+cdmv:sectoralScope11 rdf:type owl:NamedIndividual ;
+    owl:sameAs :sectoralScope11 .
 
 
 ###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope12
-<http://purl.org/aiaontology/cdmvocabulary#sectoralScope12> rdf:type owl:NamedIndividual ;
-                                                            owl:sameAs :sectoralScope12 .
+cdmv:sectoralScope12 rdf:type owl:NamedIndividual ;
+    owl:sameAs :sectoralScope12 .
 
 
 ###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope13
-<http://purl.org/aiaontology/cdmvocabulary#sectoralScope13> rdf:type owl:NamedIndividual ;
-                                                            owl:sameAs :sectoralScope13 .
+cdmv:sectoralScope13 rdf:type owl:NamedIndividual ;
+    owl:sameAs :sectoralScope13 .
 
 
 ###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope2
-<http://purl.org/aiaontology/cdmvocabulary#sectoralScope2> rdf:type owl:NamedIndividual ;
-                                                           owl:sameAs :sectoralScope2 .
+cdmv:sectoralScope2 rdf:type owl:NamedIndividual ;
+    owl:sameAs :sectoralScope2 .
 
 
 ###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope3
-<http://purl.org/aiaontology/cdmvocabulary#sectoralScope3> rdf:type owl:NamedIndividual ;
-                                                           owl:sameAs :sectoralScope3 .
+cdmv:sectoralScope3 rdf:type owl:NamedIndividual ;
+    owl:sameAs :sectoralScope3 .
 
 
 ###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope4
-<http://purl.org/aiaontology/cdmvocabulary#sectoralScope4> rdf:type owl:NamedIndividual ;
-                                                           owl:sameAs :sectoralScope4 .
+cdmv:sectoralScope4 rdf:type owl:NamedIndividual ;
+    owl:sameAs :sectoralScope4 .
 
 
 ###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope5
-<http://purl.org/aiaontology/cdmvocabulary#sectoralScope5> rdf:type owl:NamedIndividual ;
-                                                           owl:sameAs :sectoralScope5 .
+cdmv:sectoralScope5 rdf:type owl:NamedIndividual ;
+    owl:sameAs :sectoralScope5 .
 
 
 ###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope6
-<http://purl.org/aiaontology/cdmvocabulary#sectoralScope6> rdf:type owl:NamedIndividual ;
-                                                           owl:sameAs :sectoralScope6 .
+cdmv:sectoralScope6 rdf:type owl:NamedIndividual ;
+    owl:sameAs :sectoralScope6 .
 
 
 ###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope7
-<http://purl.org/aiaontology/cdmvocabulary#sectoralScope7> rdf:type owl:NamedIndividual ;
-                                                           owl:sameAs :sectoralScope7 .
+cdmv:sectoralScope7 rdf:type owl:NamedIndividual ;
+    owl:sameAs :sectoralScope7 .
 
 
 ###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope8
-<http://purl.org/aiaontology/cdmvocabulary#sectoralScope8> rdf:type owl:NamedIndividual ;
-                                                           owl:sameAs :sectoralScope8 .
+cdmv:sectoralScope8 rdf:type owl:NamedIndividual ;
+    owl:sameAs :sectoralScope8 .
 
 
 ###  http://purl.org/aiaontology/cdmvocabulary#sectoralScope9
-<http://purl.org/aiaontology/cdmvocabulary#sectoralScope9> rdf:type owl:NamedIndividual ;
-                                                           owl:sameAs :sectoralScope9 .
+cdmv:sectoralScope9 rdf:type owl:NamedIndividual ;
+    owl:sameAs :sectoralScope9 .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#degradedWetland
 :degradedWetland rdf:type owl:NamedIndividual ,
-                          <http://purl.org/aiaontology#Condition> ;
-                 rdfs:comment "Degraded wetland (including, drained, impounded, and with interrupted sediment supply)"@en ;
-                 rdfs:label "Degraded wetland"@en .
+    aia:Condition ;
+    rdfs:comment "Degraded wetland (including, drained, impounded, and with interrupted sediment supply)"@en ;
+    rdfs:label "Degraded wetland"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#intactWetland
 :intactWetland rdf:type owl:NamedIndividual ,
-                        <http://purl.org/aiaontology#Condition> ;
-               rdfs:label "Intact wetland"@en .
+    aia:Condition ;
+    rdfs:label "Intact wetland"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#nonWetlandOpenWater
 :nonWetlandOpenWater rdf:type owl:NamedIndividual ,
-                              <http://purl.org/aiaontology#Condition> ;
-                     rdfs:label "Non-wetland or open water"@en .
+    aia:Condition ;
+    rdfs:label "Non-wetland or open water"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope1
 :sectoralScope1 rdf:type owl:NamedIndividual ,
-                         :SectoralScope ;
-                rdfs:label "Energy (renewable/non-renewable)"@en .
+    :SectoralScope ;
+    rdfs:label "Energy (renewable/non-renewable)"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope10
 :sectoralScope10 rdf:type owl:NamedIndividual ,
-                          :SectoralScope ;
-                 rdfs:label "Fugitive emissions – from fuels (solid, oil, and gas)"@en .
+        :SectoralScope ;
+    rdfs:label "Fugitive emissions - from fuels (solid, oil, and gas)"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope11
 :sectoralScope11 rdf:type owl:NamedIndividual ,
-                          :SectoralScope ;
-                 rdfs:label "Fugitive emissions – from Industrial gases (halocarbons and sulphur hexafluoride)"@en .
+     :SectoralScope ;
+    rdfs:label "Fugitive emissions - from Industrial gases (halocarbons and sulphur hexafluoride)"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope12
 :sectoralScope12 rdf:type owl:NamedIndividual ,
-                          :SectoralScope ;
-                 rdfs:label "Solvents use"@en .
+        :SectoralScope ;
+    rdfs:label "Solvents use"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope13
 :sectoralScope13 rdf:type owl:NamedIndividual ,
-                          :SectoralScope ;
-                 rdfs:label "Waste handling and disposal"@en .
+        :SectoralScope ;
+    rdfs:label "Waste handling and disposal"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope14
 :sectoralScope14 rdf:type owl:NamedIndividual ,
-                          :SectoralScope ;
-                 rdfs:label "Agriculture, forestry and other land use"@en ;
-                 <http://www.w3.org/2004/02/skos/core#altLabel> "AFOLU"@en ;
-                 <http://www.w3.org/2004/02/skos/core#related> <http://purl.org/aiaontology/cdmvocabulary#sectoralScope14> .
+        :SectoralScope ;
+    rdfs:label "Agriculture, forestry and other land use"@en ;
+    skos:altLabel "AFOLU"@en ;
+    skos:related cdmv:sectoralScope14 .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope15
 :sectoralScope15 rdf:type owl:NamedIndividual ,
-                          :SectoralScope ;
-                 rdfs:label "Livestock and manure management"@en .
+        :SectoralScope ;
+    rdfs:label "Livestock and manure management"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope16
 :sectoralScope16 rdf:type owl:NamedIndividual ,
-                          :SectoralScope ;
-                 rdfs:label "Carbon capture and storage"@en .
+        :SectoralScope ;
+    rdfs:label "Carbon capture and storage"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope2
 :sectoralScope2 rdf:type owl:NamedIndividual ,
-                         :SectoralScope ;
-                rdfs:label "Energy distribution"@en .
+        :SectoralScope ;
+    rdfs:label "Energy distribution"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope3
 :sectoralScope3 rdf:type owl:NamedIndividual ,
-                         :SectoralScope ;
-                rdfs:label "Energy demand"@en .
+        :SectoralScope ;
+    rdfs:label "Energy demand"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope4
 :sectoralScope4 rdf:type owl:NamedIndividual ,
-                         :SectoralScope ;
-                rdfs:label "Manufacturing industries"@en .
+        :SectoralScope ;
+    rdfs:label "Manufacturing industries"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope5
 :sectoralScope5 rdf:type owl:NamedIndividual ,
-                         :SectoralScope ;
-                rdfs:label "Chemical industry"@en .
+        :SectoralScope ;
+    rdfs:label "Chemical industry"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope6
 :sectoralScope6 rdf:type owl:NamedIndividual ,
-                         :SectoralScope ;
-                rdfs:label "Construction"@en .
+        :SectoralScope ;
+    rdfs:label "Construction"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope7
 :sectoralScope7 rdf:type owl:NamedIndividual ,
-                         :SectoralScope ;
-                rdfs:label "Transport"@en .
+        :SectoralScope ;
+    rdfs:label "Transport"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope8
 :sectoralScope8 rdf:type owl:NamedIndividual ,
-                         :SectoralScope ;
-                rdfs:label "Mining/Mineral production"@en .
+        :SectoralScope ;
+    rdfs:label "Mining/Mineral production"@en .
 
 
 ###  http://purl.org/aiaontology/vcsvocabulary#sectoralScope9
 :sectoralScope9 rdf:type owl:NamedIndividual ,
-                         :SectoralScope ;
-                rdfs:label "Metal production"@en .
+        :SectoralScope ;
+    rdfs:label "Metal production"@en .
 
 
 #################################################################
